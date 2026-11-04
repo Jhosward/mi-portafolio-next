@@ -19,4 +19,4 @@ Portafolio profesional centralizado desarrollado con **Next.js (App Router)** y 
 
 1. Clona el repositorio:
    ```bash
-   git clone [https://github.com/TU_USUARIO/mi-portafolio-next.git](https://github.com/TU_USUARIO/mi-portafolio-next.git)
+   git clone [https://github.com/Jhosward/mi-portafolio-next.git](https://github.com/TU_USUARIO/mi-portafolio-next.git)
