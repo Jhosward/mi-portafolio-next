@@ -1,0 +1,748 @@
+/* --- RESET GLOBAL --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- BODY ACTUALIZADO --- */
+body {
+    background-color: #1a1c20; 
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Archivo Black', sans-serif;
+    color: white;
+    overflow-x: hidden;
+    
+    /* Preparamos el fondo para la animación */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 200% 200% !important; 
+    transition: background 1s ease-in-out;
+}
+
+/* --- ANIMACIÓN DE ENERGÍA --- */
+@keyframes energiaFluida {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.fondo-animado {
+    /* Esta animación moverá la unión de los colores en el centro */
+    animation: energiaFluida 4s linear infinite !important;
+}
+
+/* --- IMPORTANTE: Limpia estas clases --- */
+/* Borra los !important de estas clases para que el JS pueda cambiarlos en combate */
+body.fondo-tierra { background: radial-gradient(circle, #5e4331, #2c1e14); }
+body.fondo-fuego  { background: radial-gradient(circle, #e63946, #4a0e0e); }
+/* ... haz lo mismo con las demás, quítales el !important ... */
+
+
+/* Agrega esto para que los fondos dinámicos tengan prioridad */
+body.fondo-tierra { background: radial-gradient(circle, #5e4331, #2c1e14) !important; }
+body.fondo-fuego  { background: radial-gradient(circle, #e63946, #4a0e0e) !important; }
+body.fondo-agua   { background: radial-gradient(circle, #0077b6, #023e8a) !important; }
+body.fondo-planta { background: radial-gradient(circle, #2b9348, #004b23) !important; }
+body.fondo-lucha  { background: radial-gradient(circle, #8d99ae, #2b2d42) !important; }
+body.fondo-acero  { background: radial-gradient(circle, #bfc0c0, #4f5d75) !important; }
+body.fondo-fantasma { background: radial-gradient(circle, #5a189a, #240046) !important; }
+body.fondo-dragon { background: radial-gradient(circle, #ff9e00, #ff6d00) !important; }
+
+/* Fondo de puntos decorativos */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* --- TIPOGRAFÍA GENERAL --- */
+h2 {
+    font-weight: 300;
+    margin-bottom: 30px;
+    color: #bbb;
+}
+
+/* ============================================================
+   BOTÓN VOLVER
+   ============================================================ */
+#boton-volver {
+    position: fixed;         /* Fijo en pantalla, no se mueve al hacer scroll */
+    top: 20px;
+    left: 20px;
+    z-index: 1000;           /* Encima de todo excepto la pantalla final */
+    background: transparent;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.15);
+}
+
+#boton-volver:hover {
+    background: #d4af37;
+    color: #000;
+    transform: translateX(-3px); /* Se mueve levemente a la izquierda al hacer hover */
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* ============================================================
+   TÍTULO PRINCIPAL
+   ============================================================ */
+.titulo {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 4rem;
+    color: #ffcb05;
+    text-align: center;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    display: inline-block;
+    transform: skew(-5deg) rotate(-2deg);
+    text-shadow:
+        -3px -3px 0 #3b4cca,
+         3px -3px 0 #3b4cca,
+        -3px  3px 0 #3b4cca,
+         3px  3px 0 #3b4cca,
+         5px  5px 15px rgba(0,0,0,0.5);
+    animation: pulso-brillo 3s infinite ease-in-out;
+}
+
+/* ============================================================
+   PANTALLA DE INICIO
+   ============================================================ */
+#pantalla-inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    animation: aparecer 0.8s ease-out;
+}
+
+#boton-comenzar {
+    background: transparent;
+    border: 3px solid #ffcb05;
+    color: #ffcb05;
+    padding: 20px 60px;
+    border-radius: 50px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(255, 203, 5, 0.2);
+}
+
+#boton-comenzar:hover {
+    background: #ffcb05;
+    color: #000;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(255, 203, 5, 0.5);
+}
+
+/* ============================================================
+   MENÚ DE MODOS
+   ============================================================ */
+#menu-modos {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    animation: aparecer 0.5s ease-out;
+}
+
+.contenedor-modos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin-top: 20px;
+}
+
+.tarjeta-modo {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+}
+
+#boton-combate-rapido {
+    border-color: #d4af37;
+    background: linear-gradient(145deg, #1a1a1a, #252525);
+}
+
+#boton-combate-rapido:hover {
+    transform: translateY(-10px);
+    border-color: #ffcb05;
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+}
+
+#boton-combate-rapido h2 {
+    color: #ffcb05;
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+.tarjeta-modo.desactivada {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(1);
+    border-style: dashed;
+}
+
+.tarjeta-modo.desactivada h2 { color: #888; }
+
+.tarjeta-modo p {
+    font-size: 0.8rem;
+    color: #ff3e3e;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* ============================================================
+   SELECCIÓN DE MASCOTA
+   ============================================================ */
+#seleccionar-mascota {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.tarjeta-de-mokepon {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    color: #888;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tarjeta-de-mokepon img {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    margin-bottom: 12px;
+    filter: grayscale(0.5);
+    transition: all 0.3s ease;
+}
+
+.tarjeta-de-mokepon:hover {
+    border-color: #d4af37;
+    background-color: #252525;
+    transform: translateY(-8px);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.2);
+}
+
+.tarjeta-de-mokepon:hover img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+input[type="radio"] { display: none; }
+
+input[type="radio"]:checked + .tarjeta-de-mokepon {
+    background-color: #d4af37;
+    color: #000;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+    border: 3px solid #fff;
+    transform: scale(1.05);
+}
+
+input[type="radio"]:checked + .tarjeta-de-mokepon img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+}
+
+#boton-mascota {
+    margin-top: 40px;
+    background: transparent;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    padding: 15px 50px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#boton-mascota:hover {
+    background: #d4af37;
+    color: #000;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+}
+
+/* ============================================================
+   ARENA DE BATALLA
+   ============================================================ */
+#seleccionar-ataque {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    animation: aparecer 0.5s ease-out forwards;
+}
+
+#seleccionar-ataque p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    color: #bbb;
+}
+
+#seleccionar-ataque span {
+    color: #d4af37;
+    font-weight: bold;
+}
+
+.zona-batalla {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin: 30px 0;
+    width: 100%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.tarjeta-batalla {
+    background: #1a1a1a;
+    border: 3px solid #333;
+    border-radius: 20px;
+    padding: 20px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#tarjeta-jugador {
+    border-color: #d4af37;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+}
+
+.etiqueta-vando {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.tarjeta-batalla img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin: 15px 0;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+}
+
+img[src=""] { display: none; }
+
+#mascota-jugador,
+#mascota-enemigo {
+    font-family: 'Archivo Black', sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+}
+
+.cuadro-ataque {
+    background: #000;
+    color: #ffcb05;
+    padding: 5px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    border: 1px solid #333;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* Barras de vida */
+.contenedor-vida {
+    width: 100%;
+    height: 12px;
+    background-color: #333;
+    border-radius: 10px;
+    border: 1px solid #000;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progreso-vida {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+    transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.vida-baja {
+    background: linear-gradient(90deg, #ff4d4d, #b30000) !important;
+}
+
+/* Centro: VS y resultado */
+.centro-combate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    min-width: 140px;
+}
+
+.vs-circulo {
+    background: #ffcb05;
+    color: #000;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.6rem;
+    border: 4px solid #1a1c20;
+    box-shadow: 0 0 20px rgba(255, 203, 5, 0.4);
+}
+
+.resultado-cuadro {
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #d4af37;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #d4af37;
+    font-family: 'Archivo Black', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    min-width: 150px;
+    text-align: center;
+}
+
+/* Botones de ataque */
+.botones-ataque {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.boton-ataque {
+    background: #1a1a1a;
+    border: 2px solid #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.boton-ataque:hover {
+    transform: scale(1.05);
+    background: #252525;
+    border-color: #ffcb05;
+    box-shadow: 0 0 15px rgba(255, 203, 5, 0.3);
+}
+
+.boton-ataque.tipo-fantasma:hover { border-color: #8a2be2 !important; box-shadow: 0 0 15px rgba(138, 43, 226, 0.6) !important; }
+.boton-ataque.tipo-acero:hover    { border-color: #a9a9a9 !important; box-shadow: 0 0 15px rgba(169, 169, 169, 0.6) !important; }
+.boton-ataque.tipo-tierra:hover   { border-color: #d2691e !important; box-shadow: 0 0 15px rgba(210, 105, 30, 0.6) !important; }
+.boton-ataque.tipo-dragon:hover   { border-color: #00bfff !important; box-shadow: 0 0 15px rgba(0, 191, 255, 0.6) !important; }
+.boton-ataque.tipo-planta:hover   { border-color: #32cd32 !important; box-shadow: 0 0 15px rgba(50, 205, 50, 0.6) !important; }
+.boton-ataque.tipo-lucha:hover    { border-color: #ff0000 !important; box-shadow: 0 0 15px rgba(255, 0, 0, 0.6) !important; }
+
+button:disabled {
+    filter: grayscale(1);
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: scale(0.95);
+}
+
+/* ============================================================
+   ENERGÍA
+   ============================================================ */
+.contenedor-energia {
+    width: 100%;
+    height: 8px;
+    background-color: #222;
+    border-radius: 10px;
+    border: 1px solid #000;
+    overflow: hidden;
+    margin-top: 4px;
+    box-shadow: inset 0 0 5px #000;
+}
+
+.progreso-energia {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #00d2ff, #3a7bd5);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.7);
+    transition: width 0.4s ease-out;
+}
+
+.stats-combate {
+    text-align: center;
+    margin: 15px 0;
+    font-family: 'Archivo Black', sans-serif;
+    color: #aaa;
+    font-size: 0.8rem;
+}
+
+.barra-maxima {
+    animation: brillo-relampago 0.6s infinite alternate !important;
+    box-shadow: 0 0 20px #fff, 0 0 30px #00d2ff !important;
+}
+
+@keyframes brillo-relampago {
+    from { background: linear-gradient(90deg, #00d2ff, #3a7bd5); filter: brightness(1); }
+    to   { background: linear-gradient(90deg, #fff, #00d2ff);    filter: brightness(1.5); }
+}
+
+.texto-energia-full {
+    color: #fff !important;
+    text-shadow: 0 0 10px #00d2ff;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+/* ============================================================
+   TEXTO FLOTANTE DE DAÑO
+   ============================================================ */
+.daño-flotante {
+    position: absolute;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff3e3e;
+    text-shadow: 2px 2px 0 #000;
+    pointer-events: none;
+    z-index: 100;
+    animation: flotar-y-borrar 0.8s ease-out forwards;
+}
+
+.daño-critico {
+    color: #ffcb05 !important;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(255, 203, 5, 0.8);
+}
+
+@keyframes flotar-y-borrar {
+    0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+    20%  { opacity: 1; transform: translateY(-20px) scale(1.2); }
+    100% { opacity: 0; transform: translateY(-60px) scale(1); }
+}
+
+/* ============================================================
+   PANTALLA FINAL
+   ============================================================ */
+#pantalla-final {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 2000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: aparecerPantalla 0.4s ease-out;
+}
+
+.contenedor-final {
+    background: #1a1a1a;
+    border: 4px solid #ffcb05;
+    padding: 60px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(255, 203, 5, 0.3);
+    max-width: 90%;
+}
+
+#titulo-final {
+    font-size: 5rem;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    filter: drop-shadow(0 0 10px rgba(255, 203, 5, 0.5));
+}
+
+#boton-reiniciar {
+    background: #ffcb05;
+    color: #000;
+    border: none;
+    padding: 20px 50px;
+    border-radius: 50px;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+#boton-reiniciar:hover {
+    transform: scale(1.1);
+    background: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.texto-victoria { color: #ffcb05 !important; text-shadow: 0 0 15px rgba(255, 203, 5, 0.5); }
+.texto-derrota  { color: #ff3e3e !important; text-shadow: 0 0 15px rgba(255, 62, 62, 0.5);  }
+.texto-empate   { color: #ffffff !important; text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+
+/* ============================================================
+   ANIMACIONES
+   ============================================================ */
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.animacion-suave { animation: aparecer 0.5s ease-in-out; }
+
+@keyframes pulso-brillo {
+    0%   { filter: drop-shadow(0 0 5px rgba(255, 203, 5, 0.4)); }
+    50%  { filter: drop-shadow(0 0 15px rgba(255, 203, 5, 0.7)); }
+    100% { filter: drop-shadow(0 0 5px rgba(255, 203, 5, 0.4)); }
+}
+
+@keyframes aparecerPantalla {
+    from { opacity: 0; transform: scale(0.8); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes sacudida-roja {
+    0%   { transform: translate(1px, 1px);  border-color: #ff3838; box-shadow: 0 0 15px rgba(255,0,0,0.4); }
+    20%  { transform: translate(-3px, 0px); }
+    40%  { transform: translate(3px, 2px);  }
+    60%  { transform: translate(-3px, 1px); }
+    80%  { transform: translate(3px, 1px);  }
+    100% { transform: translate(0px, 0px);  border-color: #333; }
+}
+
+.animar-daño {
+    animation: sacudida-roja 0.4s ease-in-out;
+    background-color: rgba(255, 56, 56, 0.1) !important;
+}
+
+/* ============================================================
+   RESPONSIVE — MÓVIL
+   ============================================================ */
+@media (max-width: 650px) {
+    .zona-batalla { flex-direction: column; gap: 15px; }
+    .tarjeta-batalla { width: 90%; }
+    .vs-circulo { margin: -25px 0; z-index: 5; }
+}
+
+@media (max-width: 450px) {
+    .tarjetas { gap: 10px; }
+    .tarjeta-de-mokepon { padding: 10px; }
+    .tarjeta-de-mokepon img { width: 80px; height: 80px; }
+
+    .botones-ataque {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    .botones-ataque button { padding: 15px; font-size: 16px; }
+    .tarjeta-batalla img { width: 100px; height: auto; }
+
+    /* En móvil el botón volver es un poco más pequeño */
+    #boton-volver {
+        padding: 8px 14px;
+        font-size: 0.75rem;
+        top: 12px;
+        left: 12px;
+    }
+}
+/* La clase que JS le va a poner a la carta */
+.animacion-fuerte {
+    /* Dura medio segundo (0.5s) */
+    animation: saltoAtaque 0.5s ease-in-out;
+}
+
+/* Las instrucciones del movimiento */
+@keyframes saltoAtaque {
+    0%   { transform: translateY(0) scale(1); }
+    40%  { transform: translateY(-40px) scale(1.05); } /* Se eleva y crece un pelín */
+    80%  { transform: translateY(10px) scale(0.95); } /* Cae duro (atraviesa el piso un poquito) */
+    100% { transform: translateY(0) scale(1); } /* Vuelve a su posición original */
+}
+/* Clase base para la transición suave */
+#seccion-combate {
+    transition: background 0.8s ease-in-out;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* Estilos de fondos por tipo */
+.fondo-tierra { background: radial-gradient(circle, #5e4331, #2c1e14); }
+.fondo-fuego  { background: radial-gradient(circle, #e63946, #4a0e0e); }
+.fondo-agua   { background: radial-gradient(circle, #0077b6, #023e8a); }
+.fondo-planta { background: radial-gradient(circle, #2b9348, #004b23); }
+.fondo-lucha  { background: radial-gradient(circle, #8d99ae, #2b2d42); }
+.fondo-acero  { background: radial-gradient(circle, #bfc0c0, #4f5d75); }
+.fondo-fantasma { background: radial-gradient(circle, #5a189a, #240046); }
+.fondo-dragon { background: radial-gradient(circle, #ff9e00, #ff6d00); }
